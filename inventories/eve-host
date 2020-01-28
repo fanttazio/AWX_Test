@@ -1,8 +1,8 @@
 [asa_firewall]
 ciscoasa ansible_host=10.131.130.140
 
-[asa_firewall:vars]
-ansible_connection=network_cli
-ansible_network_os=asa
-ansible_become=yes
-ansible_become_method=enable
+#[asa_firewall:vars]
+#ansible_connection=network_cli
+#ansible_network_os=asa
+#ansible_become=yes
+#ansible_become_method=enable
