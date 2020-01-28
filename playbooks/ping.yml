@@ -1,0 +1,32 @@
+---
+- hosts: ios_switch
+  gather_facts: False
+  
+  tasks:
+      - name: Ensure the end devices are reachable
+        net_ping: 
+            dest: "{{ hostvars[inventory_hostname]['ansible_host'] }}"
+          
+- hosts: nx_switch
+  gather_facts: False
+
+  tasks:
+      - name: Ensure the end devices are reachable
+        net_ping: 
+            dest: "{{ hostvars[inventory_hostname]['ansible_host'] }}"
+
+- hosts: asa_firewall
+  gather_facts: False
+
+  tasks:
+      - name: Ensure the end devices are reachable
+        asa_ping: 
+            dest: "{{ hostvars[inventory_hostname]['ansible_host'] }}"
+
+- hosts: f5
+  gather_facts: False
+  
+  tasks:
+      - name: Ensure the end devices are reachable
+        ping: "{{ hostvars[inventory_hostname]['ansible_host'] }}"
+          
