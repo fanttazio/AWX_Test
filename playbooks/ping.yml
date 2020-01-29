@@ -17,8 +17,6 @@
 
 - hosts: asa_firewall
   gather_facts: False
-  vars_files:
-    - ../vars/groups_vars/asa_firewall
 
   tasks:
       - name: Ensure the end devices are reachable
