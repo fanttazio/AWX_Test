@@ -1,0 +1,9 @@
+---
+- name: Remove asa context
+  asa_command:
+    commands:
+      - changeto system
+      - "no context {{ customer_context }}.cfg"
+      - "delete /noconfirm disk0:/{{ customer_context }}.cfg"
+      - "no interface Port-channel1.{{ outside_vlan }}"
+      - "no interface Port-channel3.{{ inside_vlan }}"

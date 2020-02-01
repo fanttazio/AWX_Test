@@ -1,0 +1,41 @@
+---
+- name: Create backup folder for {{ rfc }}
+  file:
+    path: "/Users/mehdi.rashidi/Documents/ScriptRepo/Ansible/system-demo/backup/{{ rfc }}-{{ date }}"
+    state: directory
+    mode : '0755'
+  run_once: true
+#================================================================
+- name: Backup ios configuration
+  ios_config:
+    backup: yes 
+    backup_options:
+      filename: "{{ inventory_hostname }}-{{ rfc }}-{{ date }}.cfg"
+      dir_path: "/Users/mehdi.rashidi/Documents/ScriptRepo/Ansible/system-demo/backup/{{ rfc }}-{{ date }}"
+  when: ansible_network_os=="ios"
+#=================================================================
+- name: Backup nxos configuration
+  nxos_config:
+    backup: yes
+    backup_options:
+      filename: "{{ inventory_hostname }}-{{ rfc }}-{{ date }}.cfg" 
+      dir_path: "/Users/mehdi.rashidi/Documents/ScriptRepo/Ansible/system-demo/backup/{{ rfc }}-{{ date }}"
+  when: ansible_network_os=="nxos"
+#=================================================================
+- name: Backup asa system configuration
+  asa_config:
+    context: system
+    backup: yes
+    backup_options:
+      filename: "{{ inventory_hostname }}-system-{{ rfc }}-{{ date }}.cfg"
+      dir_path: "/Users/mehdi.rashidi/Documents/ScriptRepo/Ansible/system-demo/backup/{{ rfc }}-{{ date }}"
+  when: ansible_network_os=="asa"
+#==================================================================
+- name: Backup customer asa context  
+  asa_config:
+    context: "{{ customer_context }}"
+    backup: yes
+    backup_options:
+      filename: "{{ inventory_hostname }}-{{ customer_context }}-{{ rfc }}-{{ date }}.cfg"
+      dir_path: "/Users/mehdi.rashidi/Documents/ScriptRepo/Ansible/system-demo/backup/{{ rfc }}-{{ date }}"
+  when: ansible_network_os=="asa"

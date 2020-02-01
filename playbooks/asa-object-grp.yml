@@ -1,0 +1,22 @@
+---
+- hosts: asa_firewall
+  gather_facts: False
+  vars_files:
+    - ../vars/ansible_test.yml
+
+  
+  tasks:
+    - include_role:
+        name: ../roles/asa/object_group/network/remove
+  #    
+  #    vars:
+  #      net_obj_grp: "TEST_NET-OBJ-GRP"
+  #      target: "10.10.10.10"
+  #      network_object_type: "host"
+#
+  #    #vars:
+  #    #  net_obj_grp: "{{ object_group }}"
+  #    #  target: "{{ target }}"
+  #    #  network_object_type: "{{ network_object_type }}"
+#
+

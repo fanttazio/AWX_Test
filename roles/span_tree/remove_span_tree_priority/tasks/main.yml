@@ -1,0 +1,5 @@
+---
+- name: Remove Spanning Tree priority
+  ios_config:
+    src: templates/remove_span_tree_priority.j2
+  when: ansible_network_os=="ios"

@@ -1,0 +1,16 @@
+---
+- name: Add VLAN to a trunk port on Cisco IOS
+  ios_config: 
+    lines:
+      - switchport trunk allowed vlan add {{ vlan }}
+    parents: "interface {{ item }}"
+  loop: "{{ interfaces }}"
+  when: ansible_network_os=="ios" 
+
+- name: Add VLAN to a trunk port on Cisco NX-OS
+  nxos_config:
+    lines:
+      - switchport trunk allowed vlan add {{ vlan }}
+    parents: "interface {{ item }}"
+  loop: "{{ interfaces }}"
+  when: ansible_network_os=="nxos"

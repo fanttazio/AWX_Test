@@ -1,0 +1,15 @@
+---
+- name: Remove VLAN from an IOS box
+  ios_vlans:
+    config:
+     - vlan_id: "{{ vlan }}"
+    state: deleted
+  when: ansible_network_os == "ios"
+
+- name: Remove VLAN from an NXOS box
+  nxos_vlans:
+    config:
+     - vlan_id: "{{ vlan }}"
+    state: deleted
+    mode: "{{ vlan_mode }}"
+  when: ansible_network_os == "nxos"

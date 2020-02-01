@@ -1,0 +1,31 @@
+---
+- name: Default an interface on IOS device
+  ios_config:
+   lines:
+    - default interface {{ item }}
+  with_items:
+    "{{ interface }}"
+  when: ansible_network_os == "ios"
+#===========================================
+- name: Default an interface on NXOS device
+  nxos_interface:
+    state: default
+  with_items:
+    "{{ interface }}"
+  when: ansible_network_os == "nxos"
+#===========================================
+- name: Shutdown an interface on IOS device
+  ios_config:
+    lines:
+      - shutdown
+    parents: "interface {{ item }}"
+  with_items:
+    "{{ interface }}"
+  when: ansible_network_os == "ios"
+#===========================================
+- name: Shutdown an interface on NXOS device
+  nxos_interface:
+    admin_state: down
+  with_items:
+    "{{ interface }}"
+  when: ansible_network_os == "nxos"

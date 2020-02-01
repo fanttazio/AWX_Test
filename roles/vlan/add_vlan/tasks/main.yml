@@ -1,0 +1,7 @@
+---
+- name: Add VLAN to an IOS box
+  ios_vlans:
+    config:
+     - vlan_id: "{{ vlan_id }}"
+    state: merged
+  when: ansible_network_os == "ios"

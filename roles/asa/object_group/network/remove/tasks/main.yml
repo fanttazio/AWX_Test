@@ -1,0 +1,48 @@
+---
+# task file for asa network object-group
+#- name: "autorun"
+#  include_tasks: run.yml 
+#  when: autorun|default(false)
+
+
+- name: Remove a host from a network object group
+  asa_config:
+    lines:
+      - "no network-object host {{ target }}"
+    parents: ["object-group network {{ object_group }}"]
+    context: "{{ context }}"
+  when: 
+    - network_object_type=="host"
+    - multiple_context=="true"
+
+
+- name: Remove a network from a network object group 
+  asa_config:
+    lines:
+      - "no network-object {{ target }}"
+    parents: ["object-group network {{ object_group }}"]
+    context: "{{ context }}"
+  when: 
+    - network_object_type=="network"
+    - multiple_context=="true"
+
+
+#### for single mode ASA ####
+
+- name: Remove a host from a network object group
+  asa_config:
+    lines:
+      - "no network-object host {{ target }}"
+    parents: ["object-group network {{ object_group }}"]
+  when: 
+    - network_object_type=="host"
+    - multiple_context=="false"
+
+- name: Remove a network from a network object group 
+  asa_config:
+    lines:
+      - "no network-object {{ target }}"
+    parents: ["object-group network {{ object_group }}"]
+  when: 
+    - network_object_type=="network"
+    - multiple_context=="false"

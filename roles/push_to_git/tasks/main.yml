@@ -1,0 +1,31 @@
+---
+- name: Push config to GitLab
+  block:
+    #================================
+    - name: Git - Adding
+      command: git add .
+      args:
+        chdir: "/Users/mehdi.rashidi/Documents/ScriptRepo/Ansible/system-demo/backup/{{ rfc }}-{{ date }}"
+      register: gitadd
+      #when: git.msg is defined
+    - debug:
+        var: gitadd.cmd
+   #===============================
+    - name: Git - commiting
+      command: git commit -m "{{ rfc }}-{{ date }}"
+      args:
+        chdir: "/Users/mehdi.rashidi/Documents/ScriptRepo/Ansible/system-demo/backup/{{ rfc }}-{{ date }}"
+      register: gitcommit
+    #  when: git.msg is defined
+    - debug:
+        var: gitcommit.stdout
+   #===============================  
+    - name: Git - push
+      command: git push -u git@git.genesyslab.com:PCC-NETWORK/Ansible 
+      args:
+        chdir: "/Users/mehdi.rashidi/Documents/ScriptRepo/Ansible/system-demo/backup/{{ rfc }}-{{ date }}"
+      register: gitpush
+      #when: git.msg is defined
+    - debug:
+        var: gitpush
+  run_once: true

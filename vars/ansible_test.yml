@@ -1,0 +1,8 @@
+---
+outside_vlan: 306
+
+target: "10.10.10.10"
+network_object_type: host
+object_group: TEST_NET-OBJ-GRP
+context: system
+multiple_context: "false"
